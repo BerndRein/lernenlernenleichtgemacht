@@ -42,3 +42,10 @@ Rendern: `npx hyperframes@0.8.170 render -c post2-hochformat.html`.
 Ablauf: Uhr springt auf 18:00 („Es ist 18 Uhr.“) → zwei Problemkarten → „Nicht weil Ihr Kind zu wenig kann …“
 → Schüler am Schreibtisch → Angebot mit 299 € bis 30.11.2026 (ab 1. Dezember regulär 599 €) und Website.
 Inhalte bleiben im Bereich y 280–1500, damit die Bedienelemente von Instagram und Facebook nichts verdecken.
+
+## Hochformat-Version des 30-s-Spots (Instagram)
+
+`rein-campus-spot-30s-hochformat.mp4` im Repo-Hauptordner: 1080×1920 (9:16) für Reels, Stories und den Feed, 30 s.
+Quelle: `spot-hochformat.html` – gleiche Szenen, Tonspur und Soundeffekte wie der 16:9-Spot, Layout neu fürs Hochformat
+(senkrechte Ablaufleiste, Inhalte im Bereich y 280–1500, damit die App-Bedienelemente nichts verdecken).
+Rendern: `npx hyperframes@0.8.170 render -c spot-hochformat.html`.
