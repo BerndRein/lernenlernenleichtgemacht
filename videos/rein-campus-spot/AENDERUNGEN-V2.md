@@ -49,3 +49,14 @@ Inhalte bleiben im Bereich y 280–1500, damit die Bedienelemente von Instagram 
 Quelle: `spot-hochformat.html` – gleiche Szenen, Tonspur und Soundeffekte wie der 16:9-Spot, Layout neu fürs Hochformat
 (senkrechte Ablaufleiste, Inhalte im Bereich y 280–1500, damit die App-Bedienelemente nichts verdecken).
 Rendern: `npx hyperframes@0.8.170 render -c spot-hochformat.html`.
+
+## 4:5-Version für Instagram-Feedbeiträge
+
+`rein-campus-spot-30s-4x5.mp4`: 1080×1350 (4:5), 30 s. Instagram-Feedbeiträge akzeptieren nur 4:5 bis 16:9,
+9:16 nur als Reel. Die Datei ist ein Zuschnitt der Hochformat-Version (`crop=1080:1350:0:215`), der den Inhaltsbereich
+y 280–1500 vollständig enthält:
+
+```bash
+ffmpeg -i rein-campus-spot-30s-hochformat.mp4 -vf "crop=1080:1350:0:215" -c:v libx264 -crf 16 -preset slow \
+  -pix_fmt yuv420p -c:a copy -movflags +faststart rein-campus-spot-30s-4x5.mp4
+```
