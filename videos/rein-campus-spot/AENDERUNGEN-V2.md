@@ -10,7 +10,7 @@ Version 1 bleibt unverändert als `rein-campus-spot-30s.mp4` erhalten.
    (`assets/schueler-schreibtisch.jpg`). Passt zur Zielgruppe.
 2. **Weniger Text:** dritte Problemkarte, Zitatkarte, Zielsatz in Szene 6 entfernt. Verbleibende Schriften größer (Chips 34–38 px,
    Timeline-Labels 24/40 px, Kennzahlen-Labels 32 px), damit sie auf dem Handy lesbar sind.
-3. **Bernds Stimme:** sechs Sätze aus der Sprechprobe (`assets/vo/bernd-sprechprobe.mp3`) als Sprecherspur.
+3. **Bernds Stimme:** fünf Sätze aus der Sprechprobe (`assets/vo/bernd-sprechprobe.mp3`) als Sprecherspur.
    Die Musik wird unter der Stimme automatisch abgesenkt.
 4. **„Das Was / Das Wie“ entfernt:** Die Szene ist komplett raus. Die Programm-Szene läuft dafür
    länger (8,2–17,6 s), die Ablaufleiste baut sich passend zur Stimme langsamer auf. Länge bleibt 30 s.
