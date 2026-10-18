@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 936 936" fill="none" stroke-width="134" stroke-linecap="butt">
+  <path id="mk-teal" d="M668 333.5 H221.5 A155 155 0 0 0 66.5 488.5 V713.5 A155 155 0 0 0 221.5 868.5 H668" stroke="#3DB4B0"/>
+  <path id="mk-org" d="M0 66.5 H718.5 A150 150 0 0 1 868.5 216.5 V451.5 A150 150 0 0 1 718.5 601.5 H268" stroke="#E59560"/>
+  <path id="mk-leg" d="M700 601.5 H718.5 A150 150 0 0 1 868.5 751.5 V936" stroke="#E59560"/>
+</svg>
