@@ -1,0 +1,10 @@
+# Hochformat-Ausschnitt für Post 2 (post2-hochformat.html)
+out=assets/vo/voiceover-post2.wav
+bgm=assets/bgm-post2.wav
+duration=18
+fadeout=1.5
+# name  von   bis   -> Startzeit im Video
+hook   21.55 23.35  2.40   # „Oh nein, muss das sein?“
+normal 32.05 34.25  4.90   # „Das ist völlig normal.“
+steuer 67.95 71.08 10.90   # „Die Kinder übernehmen auf dieser Reise das Steuer.“
+reise   9.35 11.98 14.30   # „Heute beginnt eine ganz besondere Reise.“

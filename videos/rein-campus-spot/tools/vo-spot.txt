@@ -1,0 +1,10 @@
+# 30-s-Spot (index.html)
+out=assets/vo/voiceover.wav
+bgm=assets/bgm.wav
+duration=30
+# name  von   bis   -> Startzeit im Video
+hook   21.55 23.35  0.20   # „Oh nein, muss das sein?“
+normal 32.05 34.25  2.95   # „Das ist völlig normal.“
+prog   39.55 48.95  8.20   # „In unserem Programm … und vielleicht sogar richtig Spaß macht.“
+steuer 67.95 71.08 18.45   # „Die Kinder übernehmen auf dieser Reise das Steuer.“
+reise   9.35 11.98 25.60   # „Heute beginnt eine ganz besondere Reise.“

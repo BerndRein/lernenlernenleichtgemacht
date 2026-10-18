@@ -1,44 +1,43 @@
 #!/usr/bin/env bash
-# Baut die Sprecherspur (assets/vo/voiceover.wav) aus Bernds Sprechprobe
-# und die darunter abgesenkte Musik (assets/bgm.wav aus assets/bgm-original.wav).
-# Aufruf aus dem Projektordner: bash tools/build-voiceover.sh
+# Baut eine Sprecherspur aus Bernds Sprechprobe und die darunter abgesenkte Musik.
+# Aufruf aus dem Projektordner:
+#   bash tools/build-voiceover.sh                    # 30-s-Spot (tools/vo-spot.txt)
+#   bash tools/build-voiceover.sh tools/vo-post2.txt # Hochformat-Ausschnitt für Post 2
+# Die Clip-Datei legt Ausgabedateien, Länge und Schnittpunkte fest (siehe tools/vo-spot.txt).
 set -euo pipefail
 cd "$(dirname "$0")/.."
+LIST=${1:-tools/vo-spot.txt}
 SRC=assets/vo/bernd-sprechprobe.mp3
-OUT=assets/vo/voiceover.wav
 TMP=$(mktemp -d)
 
-# name  von   bis    -> Startzeit im Spot
-CLIPS=(
-  "hook   21.55 23.35  0.20"   # „Oh nein, muss das sein?“
-  "normal 32.05 34.25  2.95"   # „Das ist völlig normal.“
-  "prog   39.55 48.95  8.20"   # „In unserem Programm … und vielleicht sogar richtig Spaß macht.“
-  "steuer 67.95 71.08 18.45"   # „Die Kinder übernehmen auf dieser Reise das Steuer.“
-  "reise   9.35 11.98 25.60"   # „Heute beginnt eine ganz besondere Reise.“
-)
+OUT=$(sed -n 's/^out=//p' "$LIST")
+BGM_OUT=$(sed -n 's/^bgm=//p' "$LIST")
+DUR=$(sed -n 's/^duration=//p' "$LIST")
+FADE=$(sed -n 's/^fadeout=//p' "$LIST")
 
 inputs=(); filters=""; mix=""; i=0
-for c in "${CLIPS[@]}"; do
-  read -r name from to at <<<"$c"
+while read -r name from to at; do
   len=$(echo "$to - $from" | bc)
   ffmpeg -v error -y -ss "$from" -to "$to" -i "$SRC" -ac 1 -ar 48000 \
     -af "afade=t=in:d=0.04,afade=t=out:st=$(echo "$len - 0.08" | bc):d=0.08" "$TMP/$name.wav"
   inputs+=(-i "$TMP/$name.wav")
   ms=$(echo "$at * 1000 / 1" | bc)
   filters+="[$i:a]adelay=${ms}:all=1[d$i];"; mix+="[d$i]"; i=$((i+1))
-done
+done < <(grep -vE '^\s*(#|$|out=|bgm=|duration=|fadeout=)' "$LIST" | sed 's/#.*//')
 
 # Stimme: Rumpeln weg, etwas Präsenz, sanft komprimiert, auf Sendepegel
 ffmpeg -v error -y "${inputs[@]}" -filter_complex \
-  "${filters}${mix}amix=inputs=$i:normalize=0,apad=whole_dur=30,atrim=0:30,\
+  "${filters}${mix}amix=inputs=$i:normalize=0,apad=whole_dur=$DUR,atrim=0:$DUR,\
 highpass=f=80,equalizer=f=3000:t=q:w=1.2:g=2.5,\
 acompressor=threshold=-24dB:ratio=3:attack=8:release=120:makeup=4,\
 loudnorm=I=-16:TP=-1.5:LRA=7" -ar 48000 -ac 2 "$OUT"
 
-# Musik unter der Stimme automatisch absenken (Ducking)
+# Musik auf Länge bringen, optional ausblenden und unter der Stimme absenken (Ducking)
+fade=""
+[ -n "$FADE" ] && fade=",afade=t=out:st=$(echo "$DUR - $FADE" | bc):d=$FADE"
 ffmpeg -v error -y -i assets/bgm-original.wav -i "$OUT" -filter_complex \
-  "[0:a]atrim=0:30[m];[m][1:a]sidechaincompress=threshold=0.06:ratio=3:attack=60:release=600" \
-  -ar 48000 assets/bgm.wav
+  "[0:a]atrim=0:$DUR$fade[m];[m][1:a]sidechaincompress=threshold=0.06:ratio=3:attack=60:release=600" \
+  -ar 48000 "$BGM_OUT"
 
 rm -rf "$TMP"
-echo "fertig: $OUT + assets/bgm.wav"
+echo "fertig: $OUT + $BGM_OUT"

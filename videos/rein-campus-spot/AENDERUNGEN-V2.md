@@ -32,3 +32,13 @@ Schnittpunkte und Startzeiten stehen in `tools/build-voiceover.sh`. Nach einer �
 bash tools/build-voiceover.sh   # baut assets/vo/voiceover.wav und die abgesenkte assets/bgm.wav
 npm run render
 ```
+
+## Hochformat-Ausschnitt für Post 2
+
+`post2-hochformat-18s.mp4` im Repo-Hauptordner: 1080×1920 (9:16) für Reels, Stories und den Facebook-Feed, 18 s.
+Quelle: `post2-hochformat.html`, Tonspur über `bash tools/build-voiceover.sh tools/vo-post2.txt`.
+Rendern: `npx hyperframes@0.8.170 render -c post2-hochformat.html`.
+
+Ablauf: Uhr springt auf 18:00 („Es ist 18 Uhr.“) → zwei Problemkarten → „Nicht weil Ihr Kind zu wenig kann …“
+→ Schüler am Schreibtisch → Angebot mit 299 € bis 30.11.2026 (ab 1. Dezember regulär 599 €) und Website.
+Inhalte bleiben im Bereich y 280–1500, damit die Bedienelemente von Instagram und Facebook nichts verdecken.
