@@ -60,3 +60,6 @@ y 280–1500 vollständig enthält:
 ffmpeg -i rein-campus-spot-30s-hochformat.mp4 -vf "crop=1080:1350:0:215" -c:v libx264 -crf 16 -preset slow \
   -pix_fmt yuv420p -c:a copy -movflags +faststart rein-campus-spot-30s-4x5.mp4
 ```
+
+`post2-4x5-18s.mp4`: 4:5-Version des Post-2-Clips (1080×1350, 18 s) für Instagram-Feedbeiträge, gleicher Zuschnitt
+(`crop=1080:1350:0:215`) aus `post2-hochformat-18s.mp4`.
